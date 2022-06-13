@@ -1,0 +1,22 @@
+{
+  "name": "vacation-planner",
+  "version": "1.0.0",
+  "description": "Plan a vacation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuachio/VacationPlanner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshuachio/VacationPlanner/issues"
+  },
+  "homepage": "https://github.com/joshuachio/VacationPlanner#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
