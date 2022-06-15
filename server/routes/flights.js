@@ -24,3 +24,70 @@ amadeus.shopping.flightOffersSearch.get({
 }).catch(function(responseError){
     console.log(responseError);
 });
+
+//This is the output this above will give
+
+// { type: 'flight-offers-pricing',
+//   flightOffers:
+//    [ { type: 'flight-offer',
+//        id: '1',
+//        source: 'GDS',
+//        instantTicketingRequired: false,
+//        nonHomogeneous: false,
+//        paymentCardRequired: false,
+//        lastTicketingDate: '2022-06-16',
+//        itineraries:
+//         [ { segments:
+//              [ { departure:
+//                   { iataCode: 'DFW', terminal: 'E', at: '2022-08-01T13:03:00' },
+//                  arrival:
+//                   { iataCode: 'ATL', terminal: 'N', at: '2022-08-01T16:20:00' },
+//                  carrierCode: 'F9',
+//                  number: '1550',
+//                  aircraft: { code: '32N' },
+//                  operating: { carrierCode: 'F9' },
+//                  duration: 'PT2H17M',
+//                  id: '33',
+//                  numberOfStops: 0,
+//                  co2Emissions: [ { weight: 114, weightUnit: 'KG', cabin: 'ECONOMY' } ] } ] } ],
+//        price:
+//         { currency: 'EUR',
+//           total: '96.47',
+//           base: '77.00',
+//           fees:
+//            [ { amount: '0.00', type: 'SUPPLIER' },
+//              { amount: '0.00', type: 'TICKETING' },
+//              { amount: '0.00', type: 'FORM_OF_PAYMENT' } ],
+//           grandTotal: '96.47',
+//           billingCurrency: 'EUR' },
+//        pricingOptions:
+//         { fareType: [ 'PUBLISHED' ], includedCheckedBagsOnly: false },
+//        validatingAirlineCodes: [ 'F9' ],
+//        travelerPricings:
+//         [ { travelerId: '1',
+//             fareOption: 'STANDARD',
+//             travelerType: 'ADULT',
+//             price:
+//              { currency: 'EUR',
+//                total: '96.47',
+//                base: '77.00',
+//                taxes:
+//                 [ { amount: '4.22', code: 'ZP' },
+//                   { amount: '5.25', code: 'AY' },
+//                   { amount: '5.78', code: 'US' },
+//                   { amount: '4.22', code: 'XF' } ],
+//                refundableTaxes: '19.47' },
+//             fareDetailsBySegment:
+//              [ { segmentId: '33',
+//                  cabin: 'ECONOMY',
+//                  fareBasis: 'S21NXS2',
+//                  class: 'S' } ] } ] } ],
+//   bookingRequirements:
+//    { emailAddressRequired: true,
+//      mobilePhoneNumberRequired: true,
+//      travelerRequirements:
+//       [ { travelerId: '1',
+//           genderRequired: true,
+//           dateOfBirthRequired: true,
+//           redressRequiredIfAny: true,
+//           residenceRequired: true } ] } }
