@@ -7,7 +7,6 @@ const saltRounds = 10
 
 
 app.use(express.json());
-app.use(cors());
 
 const db = mysql.createConnection({
     user: "root",
