@@ -13,9 +13,11 @@ app.get("/", logger, (req, res) =>{
     res.render("index", {text: "cheese"})
 })
 
-const userRouter = require("./routes/users")
+// const userRouter = require("./routes/users")
+const flightRouter = require("./routes/flights")
 
-app.use("/users", userRouter)
+// app.use("/users", userRouter)
+app.use("/flights", flightRouter)
 
 
 function logger(req, res, next) {
