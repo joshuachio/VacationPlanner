@@ -25,8 +25,8 @@ router
     .route("/:id")
     .get((req, res) => {
         var flightData = getFlights(req, res)
-        // console.log(req)
-        res.render(flightData)
+        console.log(flightData)
+        res.json(flightData)
     })
     .put((req, res) => {
         res.send('update airport Get with id ' + req.params.airportID)
@@ -37,6 +37,8 @@ router
 
 const airports = [{ Airport: "Joshua" }, { Airport: "Emily" }]
 
+search = {orgLoc: '', destLoc: '', departDate: ''}
+
 router.param("id", (req, res, next, id) => {
     req.airport = airports[id]
     next()
@@ -44,26 +46,26 @@ router.param("id", (req, res, next, id) => {
 
 //function to get flights
 function getFlights(req, res) {
-amadeus.shopping.flightOffersSearch.get({
-    originLocationCode: req.params.id,
-    destinationLocationCode: 'ATL',
-    departureDate: '2022-08-01',
-    adults: '1'
-}).then(function(response){
-    return amadeus.shopping.flightOffers.pricing.post(
-      JSON.stringify({
-        'data': {
-          'type': 'flight-offers-pricing',
-          'flightOffers': [response.data[0]]
-        }
-      })
-    )
-}).then(function(response){
-    console.log(response.data);
-    return response.data;
-}).catch(function(responseError){
-    console.log(responseError);
-});
+    amadeus.shopping.flightOffersSearch.get({
+        originLocationCode: req.params.id,
+        destinationLocationCode: 'ATL',
+        departureDate: '2022-08-01',
+        adults: '1'
+    }).then(function(response){
+        return amadeus.shopping.flightOffers.pricing.post(
+        JSON.stringify({
+            'data': {
+            'type': 'flight-offers-pricing',
+            'flightOffers': [response.data[0]]
+            }
+        })
+        )
+    }).then(function(response){
+        // console.log(response.data);
+        return response.data;
+    }).catch(function(responseError){
+        console.log(responseError);
+    });
 }
 
 module.exports = router
