@@ -7,6 +7,11 @@ var amadeus = new Amadeus({
     clientSecret: 'LxTQjJGs4B6SamHk'
   });
 
+router.post("/test", (req, res) => {
+    res.send("worked")
+    console.log(req.body)
+})
+
 router.get("/", (req, res) => {
     res.render("flight")
 })
