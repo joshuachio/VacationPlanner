@@ -5504,19 +5504,19 @@ router.post("/", (req, res) => {
     })
 })
 
-router
-    .route("/:id")
-    .get((req, res) => {
-        var flightData = getFlights(req, res)
-        console.log(flightData)
-        res.json(flightData)
-    })
-    .put((req, res) => {
-        res.send('update airport Get with id ' + req.params.airportID)
-    })
-    .delete((req, res) => {
-        res.send('delete airport Get with id ' + req.params.airportID)
-    })
+// router
+//     .route("/:id")
+//     .get((req, res) => {
+//         var flightData = getFlights(req, res)
+//         console.log(flightData)
+//         res.json(flightData)
+//     })
+//     .put((req, res) => {
+//         res.send('update airport Get with id ' + req.params.airportID)
+//     })
+//     .delete((req, res) => {
+//         res.send('delete airport Get with id ' + req.params.airportID)
+//     })
 
 const airports = [{ Airport: "Joshua" }, { Airport: "Emily" }]
 
