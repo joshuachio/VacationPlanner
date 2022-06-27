@@ -7,7 +7,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 
-// app.set("view engine", "ejs")
+app.set("view engine", "ejs")
 
 app.get("/", (req, res) => { 
     // res.json({ "users": ["userOne", "userTwo", "userThree", "userFour"] })
