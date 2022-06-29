@@ -27,6 +27,7 @@ router.post("/", (req, res) => {
     }
     ).catch(function(error){
         console.log(error)
+        res.sendStatus(404)
     })
 })
 
