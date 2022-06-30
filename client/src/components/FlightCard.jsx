@@ -14,6 +14,7 @@ const FlightCard = (props) => {
         </h2>
         <h4>From {new Date(departure.at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} - {new Date(arrival.at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} on {new Date(departure.at).toLocaleDateString('en-US')} </h4>
         <p>Total Price: ${price.total}</p>
+        <button>Add to list</button>
     </div>
     )
 }
