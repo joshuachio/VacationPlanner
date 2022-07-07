@@ -1,34 +1,14 @@
-import React, { useEffect, useState } from 'react'
-
-function App() {
-
-  const [backendData, setBackendData] = useState( [{}])
-
-  useEffect(() => {
-    fetch("/api").then(
-      response => response.json()
-    ).then(
-      data => {
-        setBackendData(data)
-      }
-    )
-  }, [])
-
-  return (
-    <div>
-
-      {(typeof backendData.users === 'undefined') ? (
-        <p>Loading...</p>
-      ) : (
-        backendData.users.map((user, i) => (
-          <p key={i}>{user}</p>
-        ))
-      )}
-
-    </div>
-  )
-}
-
-
-
-export default App
+import React from 'react';
+import MyForm from './components/MyForm'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+ 
+const App = () => {
+     
+  return (  
+    <div className="App"> 
+      <MyForm />
+    </div>  
+  );  
+}  
+ 
+export default App;
