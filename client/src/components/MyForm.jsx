@@ -113,6 +113,7 @@ const MyForm = () => {
       axios.post('http://localhost:5000/flights/', formData).then(data => {
         // Update the flight results
           setFlights(data.data.data);
+          console.log(data.data.data)
           setLoading(false);
       }).catch(err => {
           console.log(err);

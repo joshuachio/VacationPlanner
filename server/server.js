@@ -4,17 +4,17 @@ const app = express()
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 var cors = require('cors')
-
+app.use(cors())
 
 
 app.use(express.json());
 
-const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "password",
-    database: "LoginSystem",
-});
+// const db = mysql.createConnection({
+//     user: "root",
+//     host: "localhost",
+//     password: "password",
+//     database: "LoginSystem",
+// });
 
 app.post("/register", (req, res) => {
     const username = req.body.username;
