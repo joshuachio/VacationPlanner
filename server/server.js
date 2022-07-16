@@ -1,8 +1,11 @@
 const express = require("express")
 const app = express()
 
-const bcrypt = require('bcrypt')
-const saltRounds = 10
+app.use(express.static("public"))
+app.use(express.urlencoded({ extended: true }))
+
+// const bcrypt = require('bcrypt')
+// const saltRounds = 10
 var cors = require('cors')
 app.use(cors())
 
@@ -16,24 +19,24 @@ app.use(express.json());
 //     database: "LoginSystem",
 // });
 
-app.post("/register", (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+// app.post("/register", (req, res) => {
+//     const username = req.body.username;
+//     const password = req.body.password;
 
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-        if (err) {
-            console.log(err)
-        }
+//     bcrypt.hash(password, saltRounds, (err, hash) => {
+//         if (err) {
+//             console.log(err)
+//         }
 
-        db.query(
-            "INSERT INTO users (username, password) VALUES (?,?)",
-            [username, hash],
-            (err, result) => {
-                console.log(err);
-            }
-        );
-    })
-});
+//         db.query(
+//             "INSERT INTO users (username, password) VALUES (?,?)",
+//             [username, hash],
+//             (err, result) => {
+//                 console.log(err);
+//             }
+//         );
+//     })
+// });
 
 
 /*app.use(express.static("public"))
