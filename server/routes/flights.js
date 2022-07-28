@@ -38,5 +38,26 @@ async function getFlights(req, res) {
     return fl
 }
 
+const flightGrid = [['SEA', 'SLC', 'DEN', 'ORD', 'JFK'],
+                    ['SFO', 'LAS', 'DFW', 'BNA', 'DCA'],
+                    ['LAX', 'PHX', 'IAH', 'ATL', 'MIA']]
+
+const findCheapestFlight = () => {
+
+    const ROWS = flightGrid.length
+    const COLS = flightGrid[0].length
+
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+            console.log(flightGrid[r][c])
+        }
+    }
+}
+
+
+
+(findCheapestFlight())
+
+
 module.exports = router
 
