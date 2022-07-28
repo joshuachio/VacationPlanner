@@ -38,25 +38,56 @@ async function getFlights(req, res) {
     return fl
 }
 
-const flightGrid = [['SEA', 'SLC', 'DEN', 'ORD', 'JFK'],
-                    ['SFO', 'LAS', 'DFW', 'BNA', 'DCA'],
-                    ['LAX', 'PHX', 'IAH', 'ATL', 'MIA']]
+const flightGrid = [["SEA", "SLC", "DEN", "ORD", "JFK"],
+                    ["SFO", "LAS", "DFW", "BNA", "DCA"],
+                    ["LAX", "PHX", "IAH", "ATL", "MIA"]]
 
-const findCheapestFlight = () => {
+const findCheapestFlight = (from, to) => {
 
-    const ROWS = flightGrid.length
-    const COLS = flightGrid[0].length
-
-    for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-            console.log(flightGrid[r][c])
-        }
+    if (!(flightGrid.some(row => row.includes(from)) && flightGrid.some(row => row.includes(to)))) {
+        return "Invalid airport code"
     }
+
+    const fromR = flightGrid.findIndex(row => row.includes(from))
+    const fromC = flightGrid[fromR].indexOf(from)
+
+    const toR = flightGrid.findIndex(row => row.includes(to))
+    const toC = flightGrid[toR].indexOf(to)
+    
+    const airportGrid = flightGrid.slice(Math.min(fromR, toR), Math.max(fromR, toR) + 1).map(row => row.slice(Math.min(fromC, toC), Math.max(fromC, toC) + 1))
+    return (airportGrid)
+
+    const ROWS = airportGrid.length
+    const COLS = airportGrid[0].length
+
+    // for (let r = 0; r < ROWS; r++) {
+    //     for (let c = 0; c < COLS; c++) {
+    //         if (flightGrid[r][c] === from) {
+    //             const fromR = r
+    //             const fromC = c
+    //             console.log(fromR, fromC)
+    //         }
+    //         if (flightGrid[r][c] === to) {
+    //             const toR = r
+    //             const toC = c
+    //             console.log(toR, toC)
+    //         }
+    //     }
+    // }
+    
+
+}
+
+const findCost = (fromR, fromC, toR, toC, total) => {
+    if (fromR === toR && fromC === toC) {
+        return total
+    }
+
 }
 
 
 
-(findCheapestFlight())
+console.log(findCheapestFlight("DF", "JFK"))
 
 
 module.exports = router
