@@ -56,14 +56,11 @@ const findCheapestFlight = (from, to) => {
     let toC = flightGrid[toR].indexOf(to)
     
     const airportGrid = flightGrid.slice(Math.min(fromR, toR), Math.max(fromR, toR) + 1).map(row => row.slice(Math.min(fromC, toC), Math.max(fromC, toC) + 1))
-    // return (airportGrid)
 
     const ROWS = airportGrid.length
     const COLS = airportGrid[0].length
 
     let priceGrid = Array.from(Array(ROWS), () => new Array(COLS))
-    // console.log(airportGrid)
-    // return priceGrid
 
     fromR = airportGrid.findIndex(row => row.includes(from))
     fromC = airportGrid[fromR].indexOf(from)
@@ -82,7 +79,7 @@ const findCheapestFlight = (from, to) => {
 const findPath = (airportGrid, priceGrid, path, ROWS, COLS, fromR, fromC, toR, toC, total) => {
 
     if (fromR === toR && fromC === toC) {
-        return path
+        return [path, total]
     }
 
     for (let r = 0; r < ROWS; r++) {
@@ -92,7 +89,6 @@ const findPath = (airportGrid, priceGrid, path, ROWS, COLS, fromR, fromC, toR, t
             }
         }
     }
-    console.log(priceGrid)
 
     //Find minimum cost in priceGrid
     let min = Infinity
@@ -143,25 +139,6 @@ async function searchFlight(req) {
     })
     return fl
 }
-
-
-
-// amadeus.shopping.flightOffersSearch.get({
-//     originLocationCode: 'SEA',
-//     destinationLocationCode: 'ATL',
-//     departureDate: '2022-09-01',
-//     returnDate: '2022-09-05',
-//     adults: '1',
-//     currencyCode: 'USD',
-//     max: 1
-// }).then(function(response){
-//     console.log(response.data);
-// }).catch(function(responseError){
-//     console.log(responseError);
-// });
-
-// console.log(fl)
-console.log(findCheapestFlight("SEA", "DFW"))
 
 
 module.exports = router
