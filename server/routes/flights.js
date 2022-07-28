@@ -92,6 +92,7 @@ const findPath = (airportGrid, priceGrid, path, ROWS, COLS, fromR, fromC, toR, t
             }
         }
     }
+    console.log(priceGrid)
 
     //Find minimum cost in priceGrid
     let min = Infinity
@@ -143,7 +144,7 @@ async function searchFlight(req) {
     return fl
 }
 
-console.log(findCost('SEA', 'SLC'))
+
 
 // amadeus.shopping.flightOffersSearch.get({
 //     originLocationCode: 'SEA',
@@ -160,7 +161,7 @@ console.log(findCost('SEA', 'SLC'))
 // });
 
 // console.log(fl)
-// console.log(findCheapestFlight("SEA", "ATL"))
+console.log(findCheapestFlight("SEA", "DFW"))
 
 
 module.exports = router
