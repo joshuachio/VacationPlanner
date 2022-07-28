@@ -48,46 +48,63 @@ const findCheapestFlight = (from, to) => {
         return "Invalid airport code"
     }
 
-    const fromR = flightGrid.findIndex(row => row.includes(from))
-    const fromC = flightGrid[fromR].indexOf(from)
+    let fromR = flightGrid.findIndex(row => row.includes(from))
+    let fromC = flightGrid[fromR].indexOf(from)
 
-    const toR = flightGrid.findIndex(row => row.includes(to))
-    const toC = flightGrid[toR].indexOf(to)
+    let toR = flightGrid.findIndex(row => row.includes(to))
+    let toC = flightGrid[toR].indexOf(to)
     
     const airportGrid = flightGrid.slice(Math.min(fromR, toR), Math.max(fromR, toR) + 1).map(row => row.slice(Math.min(fromC, toC), Math.max(fromC, toC) + 1))
-    return (airportGrid)
+    // return (airportGrid)
 
     const ROWS = airportGrid.length
     const COLS = airportGrid[0].length
 
-    // for (let r = 0; r < ROWS; r++) {
-    //     for (let c = 0; c < COLS; c++) {
-    //         if (flightGrid[r][c] === from) {
-    //             const fromR = r
-    //             const fromC = c
-    //             console.log(fromR, fromC)
-    //         }
-    //         if (flightGrid[r][c] === to) {
-    //             const toR = r
-    //             const toC = c
-    //             console.log(toR, toC)
-    //         }
-    //     }
-    // }
-    
+    let priceGrid = Array.from(Array(ROWS), () => new Array(COLS))
+    // console.log(airportGrid)
+    // return priceGrid
 
+    fromR = airportGrid.findIndex(row => row.includes(from))
+    fromC = airportGrid[fromR].indexOf(from)
+
+    toR = airportGrid.findIndex(row => row.includes(to))
+    toC = airportGrid[toR].indexOf(to)
+
+    let path = [airportGrid[fromR][fromC]]
+
+    findPath(airportGrid, path, ROWS, COLS, fromR, fromC, toR, toC)
+
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+            if (!(airportGrid[r][c] === from)) {
+                priceGrid[r][c] = findCost(airportGrid[fromR][fromC], airportGrid[r][c])
+            }
+        }
+    }
 }
 
-const findCost = (fromR, fromC, toR, toC, total) => {
+const findPath = (airportGrid, path, ROWS, COLS, fromR, fromC, toR, toC) => {
+
     if (fromR === toR && fromC === toC) {
-        return total
+        return path
     }
 
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+            if (!(path.includes(airportGrid[r][c]))) {
+                priceGrid[r][c] = findCost(airportGrid[fromR][fromC], airportGrid[r][c])
+            }
+        }
+    }
+}
+
+const findCost = (from, to) => {
+    return 100
 }
 
 
 
-console.log(findCheapestFlight("DF", "JFK"))
+console.log(findCheapestFlight("DFW", "JFK"))
 
 
 module.exports = router
