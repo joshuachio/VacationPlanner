@@ -33,6 +33,7 @@ async function getFlights(req, res) {
         originLocationCode: req.from,
         destinationLocationCode: req.destination,
         departureDate: req.departureDate,
+        // returnDate: '2022-09-05',
         adults: '1'
     })
     return fl
@@ -72,18 +73,13 @@ const findCheapestFlight = (from, to) => {
 
     let path = [airportGrid[fromR][fromC]]
 
-    findPath(airportGrid, path, ROWS, COLS, fromR, fromC, toR, toC)
+    priceGrid[fromR][fromC] = Infinity
 
-    for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-            if (!(airportGrid[r][c] === from)) {
-                priceGrid[r][c] = findCost(airportGrid[fromR][fromC], airportGrid[r][c])
-            }
-        }
-    }
+    return findPath(airportGrid, priceGrid, path, ROWS, COLS, fromR, fromC, toR, toC, 0)
+
 }
 
-const findPath = (airportGrid, path, ROWS, COLS, fromR, fromC, toR, toC) => {
+const findPath = (airportGrid, priceGrid, path, ROWS, COLS, fromR, fromC, toR, toC, total) => {
 
     if (fromR === toR && fromC === toC) {
         return path
@@ -96,15 +92,75 @@ const findPath = (airportGrid, path, ROWS, COLS, fromR, fromC, toR, toC) => {
             }
         }
     }
+
+    //Find minimum cost in priceGrid
+    let min = Infinity
+    let minR = 0
+    let minC = 0
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+            if (priceGrid[r][c] < min) {
+                min = priceGrid[r][c]
+                minR = r
+                minC = c
+            }
+        }
+    }
+
+    path.push(airportGrid[minR][minC])
+    priceGrid[minR][minC] = Infinity
+    return findPath(airportGrid, priceGrid, path, ROWS, COLS, minR, minC, toR, toC, total + min)
+
 }
 
 const findCost = (from, to) => {
-    return 100
+    req = {
+        from: from,
+        to: to
+    }
+    getFlightCost(req).then(function(response){
+        console.log(response.data[0].price.total)
+        return response.data[0].price.total
+    }).catch(function(error){
+        console.log(error)
+    })
 }
 
+const getFlightCost = async (req) => {
+    const flights = await searchFlight(req)
+    return flights
+};
 
+async function searchFlight(req) {
+    const fl = amadeus.shopping.flightOffersSearch.get({
+        originLocationCode: req.from,
+        destinationLocationCode: req.to,
+        departureDate: '2022-09-05',
+        adults: '1',
+        currencyCode: 'USD',
+        max: 1
+    })
+    return fl
+}
 
-console.log(findCheapestFlight("DFW", "JFK"))
+console.log(findCost('SEA', 'SLC'))
+
+// amadeus.shopping.flightOffersSearch.get({
+//     originLocationCode: 'SEA',
+//     destinationLocationCode: 'ATL',
+//     departureDate: '2022-09-01',
+//     returnDate: '2022-09-05',
+//     adults: '1',
+//     currencyCode: 'USD',
+//     max: 1
+// }).then(function(response){
+//     console.log(response.data);
+// }).catch(function(responseError){
+//     console.log(responseError);
+// });
+
+// console.log(fl)
+// console.log(findCheapestFlight("SEA", "ATL"))
 
 
 module.exports = router
